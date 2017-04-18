@@ -10,16 +10,15 @@ activity$date <- as.Date(activity$date,format = "%Y-%m-%d")
 ```
 
 
-
-
 ## What is mean total number of steps taken per day?
 
 Creating Histogram for total steps taken per day
 
 
 ```r
-steps <- tapply(activity$steps,as.factor(activity$date),sum,na.rm=TRUE)
-hist(steps,main = "Histogram of Steps taken per day",xlab= "Number of Steps")
+steps <- tapply(activity$steps,activity$date,sum,na.rm=TRUE)
+mon <- as.Date(names(steps))
+plot(x= mon,y=steps,type="h",main = "Histogram of Steps taken each day",xlab= "Day",ylab="Number of steps")
 ```
 
 ![](PA1_template_files/figure-html/hist-1.png)<!-- -->
@@ -80,7 +79,8 @@ Creating Histogram of the total number of steps taken each day after missing val
 
 ```r
 nsteps <- tapply(nactivity$steps,as.factor(nactivity$date),sum,na.rm=TRUE)
-hist(nsteps,main = "Histogram of Steps taken per day",xlab= "Number of Steps")
+nmon <- as.Date(names(nsteps))
+plot(x= mon,y=steps,type="h",main = "Histogram of Steps taken each day",xlab= "Day",ylab="Number of steps")
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-3-1.png)<!-- -->
@@ -111,3 +111,5 @@ xyplot(meansteps~interval| day ,data=weekdf, layout=c(1,2),type="l", xlab = "int
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-5-1.png)<!-- -->
+
+End of the document
